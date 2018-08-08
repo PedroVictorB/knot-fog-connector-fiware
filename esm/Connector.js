@@ -8,6 +8,9 @@ class Connector {
   async removeDevice(id) { // eslint-disable-line no-empty-function,no-unused-vars
   }
 
+  async listDevices() { // eslint-disable-line no-empty-function,no-unused-vars
+  }
+
   // Device (fog) to cloud
 
   async publishData(id, data) { // eslint-disable-line no-empty-function,no-unused-vars
