@@ -31,6 +31,9 @@ class Connector {
     });
   }
 
+  async listDevices() { // eslint-disable-line no-empty-function,no-unused-vars
+  }
+
   // Device (fog) to cloud
 
   async publishData(id, data) {
