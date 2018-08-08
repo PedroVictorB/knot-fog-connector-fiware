@@ -6,11 +6,11 @@ const iotaUrl = `http://${iota.host}:${iota.port}`;
 class Connector {
   async start() {
     this.ioc = socket.connect(iotaUrl);
-    console.log(this.ioc);
-    if (this.ioc.connected) {
-      return Promise.resolve(`Connected to ${iotaUrl}`);
-    }
-    return Promise.reject(new Error(`Error connecting to IoT Agent (${iotaUrl})`));
+    return new Promise((reject, resolve) => {
+      this.ioc.on('connected', () => { resolve(); });
+      this.ioc.on('connect_error', () => { reject(new Error(`Connection to ${iotaUrl} error.`)); });
+      this.ioc.on('connect_timeout', () => { reject(new Error(`Connection to ${iotaUrl} timeout.`)); });
+    });
   }
 
   async addDevice(device) {
