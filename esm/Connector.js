@@ -4,7 +4,7 @@ import { iota } from '../config';
 const iotaUrl = `http://${iota.host}:${iota.port}`;
 
 class Connector {
-  async start() { // eslint-disable-line no-empty-function
+  async start() {
     this.ioc = socket.connect(iotaUrl);
     console.log(this.ioc);
     if (this.ioc.connected) {
@@ -13,7 +13,7 @@ class Connector {
     return Promise.reject(new Error(`Error connecting to IoT Agent (${iotaUrl})`));
   }
 
-  async addDevice(device) { // eslint-disable-line no-empty-function,no-unused-vars
+  async addDevice(device) {
     this.ioc.emit('addDevice', device, (response) => {
       if (response === 'ok') {
         return Promise.resolve(`Device ${device.id} added`);
@@ -22,7 +22,7 @@ class Connector {
     });
   }
 
-  async removeDevice(id) { // eslint-disable-line no-empty-function,no-unused-vars
+  async removeDevice(id) {
     this.ioc.emit('removeDevice', id, (response) => {
       if (response === 'ok') {
         return Promise.resolve(`Device ${id} removed`);
@@ -33,7 +33,7 @@ class Connector {
 
   // Device (fog) to cloud
 
-  async publishData(id, data) { // eslint-disable-line no-empty-function,no-unused-vars
+  async publishData(id, data) {
     this.ioc.emit('publishData', id, data, (response) => {
       if (response === 'ok') {
         return Promise.resolve(`Device ${id} data published`);
@@ -42,7 +42,7 @@ class Connector {
     });
   }
 
-  async updateSchema(id, schema) { // eslint-disable-line no-empty-function,no-unused-vars
+  async updateSchema(id, schema) {
     this.ioc.emit('updateSchema', id, schema, (response) => {
       if (response === 'ok') {
         return Promise.resolve(`Device ${id} schema updated`);
@@ -51,7 +51,7 @@ class Connector {
     });
   }
 
-  async updateProperties(id, properties) { // eslint-disable-line no-empty-function,no-unused-vars
+  async updateProperties(id, properties) {
     this.ioc.emit('updateProperties', id, properties, (response) => {
       if (response === 'ok') {
         return Promise.resolve(`Device ${id} properties updated`);
@@ -63,28 +63,28 @@ class Connector {
   // Cloud to device (fog)
 
   // cb(event) where event is { id, config: {} }
-  onConfigUpdated(cb) { // eslint-disable-line no-empty-function,no-unused-vars
+  onConfigUpdated(cb) {
     this.ioc.on('onConfigUpdated', (data) => {
       cb(data);
     });
   }
 
   // cb(event) where event is { id, properties: {} }
-  onPropertiesUpdated(cb) { // eslint-disable-line no-empty-function,no-unused-vars
+  onPropertiesUpdated(cb) {
     this.ioc.on('onPropertiesUpdated', (data) => {
       cb(data);
     });
   }
 
   // cb(event) where event is { id, sensorId }
-  onDataRequested(cb) { // eslint-disable-line no-empty-function,no-unused-vars
+  onDataRequested(cb) {
     this.ioc.on('onDataRequested', (data) => {
       cb(data);
     });
   }
 
   // cb(event) where event is { id, sensorId, data }
-  onDataUpdated(cb) { // eslint-disable-line no-empty-function,no-unused-vars
+  onDataUpdated(cb) {
     this.ioc.on('onDataUpdated', (data) => {
       cb(data);
     });
