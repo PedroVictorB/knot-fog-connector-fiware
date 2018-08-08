@@ -6,8 +6,18 @@ const iotaUrl = `http://${iota.host}:${iota.port}`;
 class Connector {
   async start() {
     this.ioc = socket.connect(iotaUrl);
-    return new Promise((reject, resolve) => {
-      this.ioc.on('connected', () => { resolve(); });
+
+    // TODO: Remove events after tests
+    this.ioc.on('error', () => { console.log('Socket error.'); });
+    this.ioc.on('disconnect', () => { console.log('Socket disconnect.'); });
+    this.ioc.on('reconnect', () => { console.log('Socket reconnected.'); });
+    this.ioc.on('reconnect_attempt', () => { console.log('Socket attempt.'); });
+    this.ioc.on('reconnecting', () => { console.log('Socket reconnecting.'); });
+    this.ioc.on('reconnect_error', () => { console.log('Socket reconnect error.'); });
+    this.ioc.on('reconnect_failed', () => { console.log('Socket reconnect failed.'); });
+
+    return new Promise((resolve, reject) => {
+      this.ioc.on('connected', () => { resolve(`Connected to ${iotaUrl}`); });
       this.ioc.on('connect_error', () => { reject(new Error(`Connection to ${iotaUrl} error.`)); });
       this.ioc.on('connect_timeout', () => { reject(new Error(`Connection to ${iotaUrl} timeout.`)); });
     });
