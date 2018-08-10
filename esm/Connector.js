@@ -24,8 +24,8 @@ class Connector {
   }
 
   async addDevice(device) {
-    this.ioc.emit('addDevice', device, (response) => {
-      return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
+      this.ioc.emit('addDevice', device, (response) => {
         if (response === 'ok') {
           resolve(response);
         } else {
@@ -36,8 +36,8 @@ class Connector {
   }
 
   async removeDevice(id) {
-    this.ioc.emit('removeDevice', id, (response) => {
-      return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
+      this.ioc.emit('removeDevice', id, (response) => {
         if (response === 'ok') {
           resolve(response);
         } else {
@@ -48,8 +48,8 @@ class Connector {
   }
 
   async listDevices() {
-    this.ioc.emit('listDevices', (response) => {
-      return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
+      this.ioc.emit('listDevices', (response) => {
         if (response) {
           resolve(response);
         } else {
@@ -62,8 +62,8 @@ class Connector {
   // Device (fog) to cloud
 
   async publishData(id, data) {
-    this.ioc.emit('publishData', id, data, (response) => {
-      return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
+      this.ioc.emit('publishData', id, data, (response) => {
         if (response === 'ok') {
           resolve(response);
         } else {
@@ -74,8 +74,8 @@ class Connector {
   }
 
   async updateSchema(id, schema) {
-    this.ioc.emit('updateSchema', id, schema, (response) => {
-      return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
+      this.ioc.emit('updateSchema', id, schema, (response) => {
         if (response === 'ok') {
           resolve(response);
         } else {
@@ -86,8 +86,8 @@ class Connector {
   }
 
   async updateProperties(id, properties) {
-    this.ioc.emit('updateProperties', id, properties, (response) => {
-      return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
+      this.ioc.emit('updateProperties', id, properties, (response) => {
         if (response === 'ok') {
           resolve(response);
         } else {
