@@ -25,19 +25,25 @@ class Connector {
 
   async addDevice(device) {
     this.ioc.emit('addDevice', device, (response) => {
-      if (response === 'ok') {
-        return Promise.resolve(`Device ${device.id} added`);
-      }
-      return Promise.reject(new Error(`Error adding device ${device.id}: ${response}`));
+      return new Promise((resolve, reject) => {
+        if (response === 'ok') {
+          resolve(response);
+        } else {
+          reject(new Error(`Error adding device ${device.id}: ${response}`));
+        }
+      });
     });
   }
 
   async removeDevice(id) {
     this.ioc.emit('removeDevice', id, (response) => {
-      if (response === 'ok') {
-        return Promise.resolve(`Device ${id} removed`);
-      }
-      return Promise.reject(new Error(`Error removing device ${id}: ${response}`));
+      return new Promise((resolve, reject) => {
+        if (response === 'ok') {
+          resolve(response);
+        } else {
+          reject(new Error(`Error removing device ${id}: ${response}`));
+        }
+      });
     });
   }
 
@@ -57,28 +63,37 @@ class Connector {
 
   async publishData(id, data) {
     this.ioc.emit('publishData', id, data, (response) => {
-      if (response === 'ok') {
-        return Promise.resolve(`Device ${id} data published`);
-      }
-      return Promise.reject(new Error(`Error updating data for device ${id}: ${response}`));
+      return new Promise((resolve, reject) => {
+        if (response === 'ok') {
+          resolve(response);
+        } else {
+          reject(new Error(`Error updating data for device ${id}: ${response}`));
+        }
+      });
     });
   }
 
   async updateSchema(id, schema) {
     this.ioc.emit('updateSchema', id, schema, (response) => {
-      if (response === 'ok') {
-        return Promise.resolve(`Device ${id} schema updated`);
-      }
-      return Promise.reject(new Error(`Error updating schema for device ${id}: ${response}`));
+      return new Promise((resolve, reject) => {
+        if (response === 'ok') {
+          resolve(response);
+        } else {
+          reject(new Error(`Error updating schema for device ${id}: ${response}`));
+        }
+      });
     });
   }
 
   async updateProperties(id, properties) {
     this.ioc.emit('updateProperties', id, properties, (response) => {
-      if (response === 'ok') {
-        return Promise.resolve(`Device ${id} properties updated`);
-      }
-      return Promise.reject(new Error(`Error updating properties for device ${id}: ${response}`));
+      return new Promise((resolve, reject) => {
+        if (response === 'ok') {
+          resolve(response);
+        } else {
+          reject(new Error(`Error updating properties for device ${id}: ${response}`));
+        }
+      });
     });
   }
 
